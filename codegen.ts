@@ -71,12 +71,12 @@ const config: CodegenConfig = {
   overwrite: true,
   generates: {
     "src/gql/__types__.ts": {
-      schema: "src/gql/schema.graphql",
+      schema: "https://beta.pokeapi.co/graphql/v1beta", //TODO: env
       documents: "src/gql/**/*.gql",
       plugins: ["typescript"],
     },
     "src/gql/generates.ts": {
-      schema: "src/gql/schema.graphql",
+      schema: "https://beta.pokeapi.co/graphql/v1beta", //TODO: env
       documents: "src/gql/**/*.gql",
       preset: "near-operation-file",
       presetConfig: {
