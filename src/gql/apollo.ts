@@ -27,7 +27,7 @@ const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
  * 통신할 endpoint를 uri에 넣어준다.
  */
 const httpLink = new HttpLink({
-  uri: "http://localhost",
+  uri: "https://beta.pokeapi.co/graphql/v1beta", //TODO: env로 변경
   credentials: "same-origin",
 });
 
