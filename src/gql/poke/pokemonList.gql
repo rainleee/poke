@@ -1,11 +1,26 @@
-query pokemonList($limit: Int, $offset: Int) {
-  pokemon_v2_pokemon(limit: $limit, offset: $offset) {
-    pokemon_v2_pokemonspecy {
-      pokemon_v2_pokemonspeciesnames_aggregate {
-        nodes {
-          name
-          language_id
-          genus
+query pokemonList(
+  $limit: Int
+  $offset: Int
+  $orderBy: [pokemon_v2_pokemonsprites_order_by!]
+) {
+  pokemon_v2_pokemonsprites(
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    sprites
+    id
+    pokemon_id
+    pokemon_v2_pokemon {
+      name
+      pokemon_v2_pokemonspecy {
+        pokemon_v2_pokemonspeciesnames_aggregate {
+          nodes {
+            name
+            language_id
+            id
+            genus
+          }
         }
       }
     }
