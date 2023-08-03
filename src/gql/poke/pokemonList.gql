@@ -1,0 +1,13 @@
+query pokemonList($limit: Int, $offset: Int) {
+  pokemon_v2_pokemon(limit: $limit, offset: $offset) {
+    pokemon_v2_pokemonspecy {
+      pokemon_v2_pokemonspeciesnames_aggregate {
+        nodes {
+          name
+          language_id
+          genus
+        }
+      }
+    }
+  }
+}
