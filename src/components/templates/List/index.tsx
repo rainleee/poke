@@ -1,7 +1,7 @@
-import PokemonSpecies from "@/components/organisms/List/Species";
+import PokemonSpeciesList from "@/components/organisms/List";
 
 const PokemonList = () => {
-  return <PokemonSpecies />;
+  return <PokemonSpeciesList />;
 };
 
 export default PokemonList;
