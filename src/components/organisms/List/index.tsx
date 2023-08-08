@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Search } from "@/components/molecules/Search";
+
 import { PokemonListContainer } from "./styles";
 import PokemonSpeciesCard from "./Species";
 
@@ -7,7 +9,8 @@ const PokemonList = () => {
   return (
     <PokemonListContainer>
       <div>GNB</div>
-      <input type="text" placeholder="검색어를 입력하세요." />
+      <Search ButtonText="검색" placeholder="검색어를 입력하세요." />
+      {/* TODO: map 돌리기 */}
       <PokemonSpeciesCard />
     </PokemonListContainer>
   );
