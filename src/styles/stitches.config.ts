@@ -2,7 +2,12 @@ import type * as Stitches from "@stitches/react";
 import { createStitches } from "@stitches/react";
 
 import { breakPoints } from "./breakPoints";
-import { BlueGrayColors, STBlueColors, WarmGrayColors } from "./theme";
+import {
+  BlueGrayColors,
+  PokeColors,
+  STBlueColors,
+  WarmGrayColors,
+} from "./theme";
 
 export type CSS = Stitches.CSS<typeof config>;
 
@@ -67,6 +72,7 @@ export const { getCssText, keyframes, globalCss, styled, css, theme, config } =
         ...BlueGrayColors,
         ...WarmGrayColors,
         ...STBlueColors,
+        ...PokeColors,
       },
       zIndices: {
         dimMax: 999,
