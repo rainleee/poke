@@ -48,8 +48,13 @@ const BlueGrayColors = {
   "BlueGray-50": "#F4F6F9",
 };
 
+const PokeColors = {
+  "Red-DA343C": "#DA343C",
+};
+
 deepFreeze(STBlueColors);
 deepFreeze(WarmGrayColors);
 deepFreeze(BlueGrayColors);
+deepFreeze(PokeColors);
 
-export { STBlueColors, WarmGrayColors, BlueGrayColors };
+export { STBlueColors, WarmGrayColors, BlueGrayColors, PokeColors };
