@@ -1,4 +1,7 @@
 import React from "react";
+import Image from "next/image";
+
+import { Title } from "@/components/molecules/Title";
 
 import usePokemonSpeciesStates from "./states";
 import usePokemonSpeciesHandlers from "./handlers";
@@ -7,6 +10,7 @@ import {
   SpeciesContainer,
   SpeciesContentSection,
   SpeciesProfileSection,
+  SpeciesTypeSection,
   Wrapper,
 } from "./styles";
 
@@ -29,17 +33,20 @@ const PokemonSpeciesCard = () => {
             <SpeciesContainer key={i}>
               <SpeciesProfileSection>
                 {/*TODO: nextImage로 변경  */}
-                <img
+                <Image
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${value.image}`}
+                  width={150}
+                  height={150}
+                  alt="이미지가 깨졌습니다."
                 />
               </SpeciesProfileSection>
               <SpeciesContentSection>
                 <div>포켓넘버</div>
-                <div>{value.name}</div>
-                <div>
+                <Title title={value.name} />
+                <SpeciesTypeSection>
                   <div>속성1</div>
                   <div>속성2</div>
-                </div>
+                </SpeciesTypeSection>
               </SpeciesContentSection>
             </SpeciesContainer>
           );
