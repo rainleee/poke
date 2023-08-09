@@ -1,17 +1,19 @@
-import React, { forwardRef, memo } from 'react';
+import React, { forwardRef, memo } from "react";
 
-import { TitleProps } from './type';
-import { TitleWrapper, TitleText, ChildrenBox } from './style';
+import { TitleProps } from "./type";
+import { TitleWrapper, TitleText, ChildrenBox } from "./styles";
 
 export const Title = memo(
-  forwardRef<HTMLDivElement, TitleProps>(({ title, children, ...restProps }, ref) => {
-    return (
-      <TitleWrapper {...restProps} ref={ref}>
-        <TitleText>{title}</TitleText>
-        {children && <ChildrenBox>{children}</ChildrenBox>}
-      </TitleWrapper>
-    );
-  }),
+  forwardRef<HTMLDivElement, TitleProps>(
+    ({ title, children, ...restProps }, ref) => {
+      return (
+        <TitleWrapper {...restProps} ref={ref}>
+          <TitleText>{title}</TitleText>
+          {children && <ChildrenBox>{children}</ChildrenBox>}
+        </TitleWrapper>
+      );
+    }
+  )
 );
 
-Title.displayName = 'Title';
+Title.displayName = "Title";

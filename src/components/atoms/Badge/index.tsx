@@ -1,7 +1,7 @@
-import React, { forwardRef, memo } from 'react';
+import React, { forwardRef, memo } from "react";
 
-import { BadgeProps } from './type';
-import { BadgeStyled } from './style';
+import { BadgeProps } from "./types";
+import { BadgeStyled } from "./styles";
 
 export const Badge = memo(
   forwardRef<HTMLDivElement, BadgeProps>(({ children, ...restProps }, ref) => {
@@ -10,7 +10,7 @@ export const Badge = memo(
         {children}
       </BadgeStyled>
     );
-  }),
+  })
 );
 
-Badge.displayName = 'Badge';
+Badge.displayName = "Badge";

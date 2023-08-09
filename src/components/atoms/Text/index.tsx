@@ -1,16 +1,18 @@
-import React, { forwardRef, memo } from 'react';
+import React, { forwardRef, memo } from "react";
 
-import { TextStyled } from './style';
-import { TextProps } from './type';
+import { TextStyled } from "./styles";
+import { TextProps } from "./types";
 
 export const Text = memo(
-  forwardRef<HTMLParagraphElement, TextProps>(({ children, ...restProps }, ref) => {
-    return (
-      <TextStyled {...restProps} ref={ref}>
-        {children}
-      </TextStyled>
-    );
-  }),
+  forwardRef<HTMLParagraphElement, TextProps>(
+    ({ children, ...restProps }, ref) => {
+      return (
+        <TextStyled {...restProps} ref={ref}>
+          {children}
+        </TextStyled>
+      );
+    }
+  )
 );
 
-Text.displayName = 'Text';
+Text.displayName = "Text";
