@@ -1,7 +1,7 @@
-import React, { forwardRef, memo } from 'react';
+import React, { forwardRef, memo } from "react";
 
-import { ChipProps } from './type';
-import { ChipStyled } from './style';
+import { ChipProps } from "./types";
+import { ChipStyled } from "./styles";
 
 export const Chip = memo(
   forwardRef<HTMLDivElement, ChipProps>(({ children, ...restProps }, ref) => {
@@ -10,7 +10,7 @@ export const Chip = memo(
         {children}
       </ChipStyled>
     );
-  }),
+  })
 );
 
-Chip.displayName = 'Chip';
+Chip.displayName = "Chip";
