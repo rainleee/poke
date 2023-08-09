@@ -1,6 +1,6 @@
 import React, { forwardRef, memo } from "react";
 
-import { InputProps } from "./type";
+import { InputProps } from "./types";
 import { InputStyled } from "./styles";
 
 export const Input = memo(

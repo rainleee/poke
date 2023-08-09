@@ -1,6 +1,6 @@
 import React, { forwardRef, memo } from "react";
 
-import { TitleProps } from "./type";
+import { TitleProps } from "./types";
 import { TitleWrapper, TitleText, ChildrenBox } from "./styles";
 
 export const Title = memo(

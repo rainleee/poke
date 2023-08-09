@@ -1,7 +1,8 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef } from "react";
 
-import { DividerStyled } from './style';
+import { DividerStyled } from "./styles";
 
-export interface DividerProps extends ComponentPropsWithoutRef<typeof DividerStyled> {
-  orientation?: 'horizontal' | 'vertical';
+export interface DividerProps
+  extends ComponentPropsWithoutRef<typeof DividerStyled> {
+  orientation?: "horizontal" | "vertical";
 }

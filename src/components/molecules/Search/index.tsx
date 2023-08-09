@@ -3,8 +3,8 @@ import React, { forwardRef, memo } from "react";
 import { TextInput } from "@/components/atoms/TextInput";
 import { Button } from "@/components/atoms/Button";
 
-import { SearchProps } from "./type";
-import { SearchWrapper } from "./style";
+import { SearchProps } from "./types";
+import { SearchWrapper } from "./styles";
 
 export const Search = memo(
   forwardRef<HTMLDivElement, SearchProps>(
