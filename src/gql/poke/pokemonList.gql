@@ -2,27 +2,48 @@ query pokemonList(
   $limit: Int
   $offset: Int
   $orderBy: [pokemon_v2_pokemonsprites_order_by!]
+  $where: pokemon_v2_pokemonspeciesflavortext_bool_exp
+  $pokemonV2PokemonspritesWhere2: pokemon_v2_pokemonsprites_bool_exp
+  $pokemonV2PokemonspeciesnamesAggregateWhere2: pokemon_v2_pokemonspeciesname_bool_exp
+  $pokemonV2TypenamesAggregateWhere2: pokemon_v2_typename_bool_exp
 ) {
   pokemon_v2_pokemonsprites(
     limit: $limit
     offset: $offset
     order_by: $orderBy
+    where: $pokemonV2PokemonspritesWhere2
   ) {
     sprites
-    id
-    pokemon_id
+    pokemon_id # 포켓몬 number
     pokemon_v2_pokemon {
-      name
       pokemon_v2_pokemonspecy {
-        pokemon_v2_pokemonspeciesnames_aggregate {
+        pokemon_v2_pokemonspeciesnames_aggregate(
+          where: $pokemonV2PokemonspeciesnamesAggregateWhere2
+        ) {
           nodes {
             name
-            language_id
-            id
             genus
           }
         }
+        pokemon_v2_pokemonspeciesflavortexts_aggregate(where: $where) {
+          nodes {
+            flavor_text
+          }
+        }
       }
+      pokemon_v2_pokemontypes {
+        pokemon_v2_type {
+          pokemon_v2_typenames_aggregate(
+            where: $pokemonV2TypenamesAggregateWhere2
+          ) {
+            nodes {
+              name
+            }
+          }
+        }
+      }
+      weight
+      height
     }
   }
 }

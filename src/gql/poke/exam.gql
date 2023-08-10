@@ -1,8 +1,0 @@
-query Pokemon_v2_versionname($pokemonV2LocationnameByPkId: Int!) {
-  pokemon_v2_locationname_by_pk(id: $pokemonV2LocationnameByPkId) {
-    id
-    language_id
-    location_id
-    name
-  }
-}
