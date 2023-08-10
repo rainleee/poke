@@ -32,7 +32,6 @@ const PokemonSpeciesCard = () => {
           return (
             <SpeciesContainer key={i}>
               <SpeciesProfileSection>
-                {/*TODO: nextImage로 변경  */}
                 <Image
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${value.image}`}
                   width={150}
@@ -41,11 +40,13 @@ const PokemonSpeciesCard = () => {
                 />
               </SpeciesProfileSection>
               <SpeciesContentSection>
-                <div>포켓넘버</div>
+                <div>No.{value.id}</div>
                 <Title title={value.name} />
+                <div>{value.genus}</div>
                 <SpeciesTypeSection>
-                  <div>속성1</div>
-                  <div>속성2</div>
+                  {value.types.map((type: string, i: number) => (
+                    <div key={i}>{type}</div>
+                  ))}
                 </SpeciesTypeSection>
               </SpeciesContentSection>
             </SpeciesContainer>
