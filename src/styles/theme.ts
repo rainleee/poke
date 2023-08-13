@@ -48,7 +48,29 @@ const BlueGrayColors = {
   "BlueGray-50": "#F4F6F9",
 };
 
+const PokeTypeColors = {
+  TypeGrass: "#42BF24", //풀
+  TypeWater: "#6890F0", //물
+  TypePoison: "#994DCF", //독
+  TypeGround: "#E0C068", //땅
+  TypeDark: "#705848", //악
+  TypeFire: "#F08030", //불꽃
+  TypeFlying: "#A890F0", //비행
+  TypeBug: "#A8B820", //벌레
+  TypeElectric: "#F8D030", //전기
+  TypeFighting: "#C03028", //격투
+  TypeRock: "#B8A038", //바위
+  TypeSteel: "#B8B8D0", //강철
+  TypeIce: "#98D8D8", //얼음
+  TypeNormal: "#A8A878", //노말
+  TypeFairy: "#EE99AC", //페어리
+  TypeGhost: "#705898", //고스트
+  TypeDragon: "#7038F8", //드래곤
+  TypePsychic: "#F85888", //에스퍼
+};
+
 const PokeColors = {
+  ...PokeTypeColors,
   "Red-DA343C": "#DA343C",
 };
 
