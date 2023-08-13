@@ -2,11 +2,13 @@ import React from "react";
 import Image from "next/image";
 
 import { Title } from "@/components/molecules/Title";
+import { handlePokeTypeColor } from "@/utils";
 
 import usePokemonSpeciesStates from "./states";
 import usePokemonSpeciesHandlers from "./handlers";
 import usePokemonSpeciesEffects from "./effects";
 import {
+  PokeTypeBadge,
   SpeciesContainer,
   SpeciesContentSection,
   SpeciesProfileSection,
@@ -44,9 +46,16 @@ const PokemonSpeciesCard = () => {
                 <Title title={value.name} />
                 <div>{value.genus}</div>
                 <SpeciesTypeSection>
-                  {value.types.map((type: string, i: number) => (
-                    <div key={i}>{type}</div>
-                  ))}
+                  {value.types.map((type: string, i: number) => {
+                    return (
+                      <PokeTypeBadge
+                        typeColor={handlePokeTypeColor(type)}
+                        key={i}
+                      >
+                        {type}
+                      </PokeTypeBadge>
+                    );
+                  })}
                 </SpeciesTypeSection>
               </SpeciesContentSection>
             </SpeciesContainer>
