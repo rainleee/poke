@@ -9,7 +9,7 @@ export const BadgeStyled = styled("div", {
   fontWeight: "600",
   width: "23px",
   height: "23px",
-  borderRadius: "50%",
+  br: "50%",
   variants: {
     color: {
       blue: { backgroundColor: "#6165FF" },
