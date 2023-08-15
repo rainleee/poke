@@ -6,75 +6,58 @@ const usePokemonSpeciesHandlers = (states: States) => {
   const handlePokemonList = async () => {
     const { data } = await getPokemonList({
       variables: {
-        limit: 50,
-        offset: 0,
-        orderBy: { pokemon_id: "asc" },
         where: {
           language_id: {
             _eq: 3,
           },
+          pokemon_v2_pokemonspecy: {},
         },
-        pokemonV2PokemonspeciesnamesAggregateWhere2: {
-          language_id: {
-            _eq: 3,
-          },
-        },
+        offset: 0,
+        limit: 50,
         pokemonV2TypenamesAggregateWhere2: {
           language_id: {
             _eq: 3,
           },
         },
-      }, //TODO: query param으로 변경
+        pokemonV2PokemonsDistinctOn2: "pokemon_species_id",
+      },
     });
 
-    const pokemonDataList = data?.pokemon_v2_pokemonsprites.map((sprite) => {
-      //TODO: 이미지가 null일 경우는 어떻게..?
-      const image = JSON.parse(sprite.sprites)["front_default"]
-        ? JSON.parse(sprite.sprites)["front_default"]
-        : JSON.parse(sprite.sprites)["other"]["official-artwork"][
-            "front_default"
-          ];
-      const types: string[] = [];
+    if (data) {
+      const species = data?.pokemon_v2_pokemonspeciesname_aggregate;
 
-      const flavorText = flattenNodes(
-        sprite.pokemon_v2_pokemon?.pokemon_v2_pokemonspecy
-          ?.pokemon_v2_pokemonspeciesflavortexts_aggregate.nodes
-      )["flavor_text"];
+      const pokemonDataList = species.nodes.map((node) => {
+        const types: string[] = [];
+        let image = "";
 
-      const speciesNames = flattenNodes(
-        sprite.pokemon_v2_pokemon?.pokemon_v2_pokemonspecy
-          ?.pokemon_v2_pokemonspeciesnames_aggregate.nodes
-      );
+        node.pokemon_v2_pokemonspecy?.pokemon_v2_pokemons.forEach((v) => {
+          v.pokemon_v2_pokemonsprites.forEach((sprite) => {
+            image = JSON.parse(sprite.sprites)["front_default"]
+              ? JSON.parse(sprite.sprites)["front_default"]
+              : JSON.parse(sprite.sprites)["other"]["official-artwork"][
+                  "front_default"
+                ];
+          });
 
-      sprite.pokemon_v2_pokemon?.pokemon_v2_pokemontypes.forEach((type) => {
-        types.push(
-          flattenNodes(
-            type.pokemon_v2_type?.pokemon_v2_typenames_aggregate.nodes
-          )["name"]
-        );
+          v.pokemon_v2_pokemontypes.map((node) => {
+            const pokemonType = flattenNodes(
+              node.pokemon_v2_type?.pokemon_v2_typenames_aggregate.nodes
+            )["name"];
+            types.push(pokemonType);
+          });
+        });
+
+        return {
+          id: node.pokemon_species_id,
+          name: node.name,
+          genus: node.genus,
+          types: [...types],
+          image: image.replace("/media", ""),
+        };
       });
 
-      //TODO: 상세 data 이관
-      //weight
-      // height
-      // flavorText
-      return {
-        id: sprite.pokemon_id,
-        weight: sprite.pokemon_v2_pokemon?.weight
-          ? `${sprite.pokemon_v2_pokemon?.weight / 10}kg`
-          : "알수없음",
-        height: sprite.pokemon_v2_pokemon?.height
-          ? `${sprite.pokemon_v2_pokemon?.height / 10}m`
-          : "알수없음",
-        name: speciesNames.name,
-        genus: speciesNames.genus,
-        flavorText,
-        types: [...types],
-        image: image.replace("/media", ""),
-      };
-    });
-
-    setSpeciesList(pokemonDataList); //TODO: 최종 버전때 타입 다시 수정하기
+      setSpeciesList(pokemonDataList); //TODO: 최종 버전때 타입 다시 수정하기
+    }
   };
 
   const flattenNodes = (nodes: any) => {

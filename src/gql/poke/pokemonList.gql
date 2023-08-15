@@ -1,49 +1,39 @@
 query pokemonList(
+  $where: pokemon_v2_pokemonspeciesname_bool_exp
   $limit: Int
   $offset: Int
-  $orderBy: [pokemon_v2_pokemonsprites_order_by!]
-  $where: pokemon_v2_pokemonspeciesflavortext_bool_exp
-  $pokemonV2PokemonspritesWhere2: pokemon_v2_pokemonsprites_bool_exp
-  $pokemonV2PokemonspeciesnamesAggregateWhere2: pokemon_v2_pokemonspeciesname_bool_exp
   $pokemonV2TypenamesAggregateWhere2: pokemon_v2_typename_bool_exp
+  $distinctOn: [pokemon_v2_pokemonspeciesname_select_column!]
+  $pokemonV2PokemonsDistinctOn2: [pokemon_v2_pokemon_select_column!]
 ) {
-  pokemon_v2_pokemonsprites(
+  pokemon_v2_pokemonspeciesname_aggregate(
+    where: $where
     limit: $limit
     offset: $offset
-    order_by: $orderBy
-    where: $pokemonV2PokemonspritesWhere2
+    distinct_on: $distinctOn
   ) {
-    sprites
-    pokemon_id # 포켓몬 number
-    pokemon_v2_pokemon {
+    nodes {
+      name
+      genus
+      pokemon_species_id
       pokemon_v2_pokemonspecy {
-        pokemon_v2_pokemonspeciesnames_aggregate(
-          where: $pokemonV2PokemonspeciesnamesAggregateWhere2
-        ) {
-          nodes {
-            name
-            genus
+        pokemon_v2_pokemons(distinct_on: $pokemonV2PokemonsDistinctOn2) {
+          pokemon_v2_pokemonsprites {
+            sprites
           }
-        }
-        pokemon_v2_pokemonspeciesflavortexts_aggregate(where: $where) {
-          nodes {
-            flavor_text
-          }
-        }
-      }
-      pokemon_v2_pokemontypes {
-        pokemon_v2_type {
-          pokemon_v2_typenames_aggregate(
-            where: $pokemonV2TypenamesAggregateWhere2
-          ) {
-            nodes {
-              name
+          pokemon_v2_pokemontypes {
+            pokemon_v2_type {
+              pokemon_v2_typenames_aggregate(
+                where: $pokemonV2TypenamesAggregateWhere2
+              ) {
+                nodes {
+                  name
+                }
+              }
             }
           }
         }
       }
-      weight
-      height
     }
   }
 }
