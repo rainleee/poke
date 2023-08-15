@@ -10,7 +10,6 @@ const usePokemonSpeciesHandlers = (states: States) => {
           language_id: {
             _eq: 3,
           },
-          pokemon_v2_pokemonspecy: {},
         },
         offset: 0,
         limit: 50,
