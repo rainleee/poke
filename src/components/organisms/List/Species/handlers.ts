@@ -62,7 +62,10 @@ const usePokemonSpeciesHandlers = (states: States) => {
         setNextPage(species.nodes.length === limit);
         setSpeciesList(speciesList.concat(pokemonDataList)); //TODO: 최종 버전때 타입 다시 수정하기
       }
-    } catch (error) {}
+    } catch (error) {
+      //TODO: error 처리
+      console.error(error);
+    }
   }, [offset]);
 
   const flattenNodes = (nodes: any) => {
