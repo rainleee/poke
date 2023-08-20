@@ -1,63 +1,69 @@
-import { States } from "./type";
+import { useCallback } from "react";
+
+import { States } from "./types";
 
 const usePokemonSpeciesHandlers = (states: States) => {
-  const { getPokemonList, setSpeciesList } = states;
+  const {
+    getPokemonList,
+    setSpeciesList,
+    speciesList,
+    KOREAN_LANGUAGE_AND_DISTINCT_ON_INPUT,
+    offset,
+    setOffset,
+    limit,
+    setFetching,
+    setNextPage,
+  } = states;
 
-  const handlePokemonList = async () => {
-    const { data } = await getPokemonList({
-      variables: {
-        where: {
-          language_id: {
-            _eq: 3,
-          },
+  const handlePokemonList = useCallback(async () => {
+    try {
+      const { data } = await getPokemonList({
+        variables: {
+          ...KOREAN_LANGUAGE_AND_DISTINCT_ON_INPUT,
+          offset,
+          limit,
         },
-        offset: 0,
-        limit: 50,
-        pokemonV2TypenamesAggregateWhere2: {
-          language_id: {
-            _eq: 3,
-          },
-        },
-        pokemonV2PokemonsDistinctOn2: "pokemon_species_id",
-      },
-    });
-
-    if (data) {
-      const species = data?.pokemon_v2_pokemonspeciesname_aggregate;
-
-      const pokemonDataList = species.nodes.map((node) => {
-        const types: string[] = [];
-        let image = "";
-
-        node.pokemon_v2_pokemonspecy?.pokemon_v2_pokemons.forEach((v) => {
-          v.pokemon_v2_pokemonsprites.forEach((sprite) => {
-            image = JSON.parse(sprite.sprites)["front_default"]
-              ? JSON.parse(sprite.sprites)["front_default"]
-              : JSON.parse(sprite.sprites)["other"]["official-artwork"][
-                  "front_default"
-                ];
-          });
-
-          v.pokemon_v2_pokemontypes.map((node) => {
-            const pokemonType = flattenNodes(
-              node.pokemon_v2_type?.pokemon_v2_typenames_aggregate.nodes
-            )["name"];
-            types.push(pokemonType);
-          });
-        });
-
-        return {
-          id: node.pokemon_species_id,
-          name: node.name,
-          genus: node.genus,
-          types: [...types],
-          image: image.replace("/media", ""),
-        };
       });
 
-      setSpeciesList(pokemonDataList); //TODO: 최종 버전때 타입 다시 수정하기
-    }
-  };
+      if (data) {
+        const species = data?.pokemon_v2_pokemonspeciesname_aggregate;
+
+        const pokemonDataList = species.nodes.map((node) => {
+          const types: string[] = [];
+          let image = "";
+
+          node.pokemon_v2_pokemonspecy?.pokemon_v2_pokemons.forEach((v) => {
+            v.pokemon_v2_pokemonsprites.forEach((sprite) => {
+              image = JSON.parse(sprite.sprites)["front_default"]
+                ? JSON.parse(sprite.sprites)["front_default"]
+                : JSON.parse(sprite.sprites)["other"]["official-artwork"][
+                    "front_default"
+                  ];
+            });
+
+            v.pokemon_v2_pokemontypes.map((node) => {
+              const pokemonType = flattenNodes(
+                node.pokemon_v2_type?.pokemon_v2_typenames_aggregate.nodes
+              )["name"];
+              types.push(pokemonType);
+            });
+          });
+
+          return {
+            id: node.pokemon_species_id,
+            name: node.name,
+            genus: node.genus,
+            types: [...types],
+            image: image.replace("/media", ""),
+          };
+        });
+        setOffset(speciesList.length + limit);
+        setFetching(false);
+        setNextPage(species.nodes.length === limit);
+        setSpeciesList(speciesList.concat(pokemonDataList)); //TODO: 최종 버전때 타입 다시 수정하기
+      }
+    } catch (error) {}
+  }, [offset]);
 
   const flattenNodes = (nodes: any) => {
     const flattenedData = {} as any;

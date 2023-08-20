@@ -3,14 +3,12 @@ query pokemonList(
   $limit: Int
   $offset: Int
   $pokemonV2TypenamesAggregateWhere2: pokemon_v2_typename_bool_exp
-  $distinctOn: [pokemon_v2_pokemonspeciesname_select_column!]
   $pokemonV2PokemonsDistinctOn2: [pokemon_v2_pokemon_select_column!]
 ) {
   pokemon_v2_pokemonspeciesname_aggregate(
     where: $where
     limit: $limit
     offset: $offset
-    distinct_on: $distinctOn
   ) {
     nodes {
       name
