@@ -1,14 +1,6 @@
-import { PokemonListQuery } from "@/gql/poke/pokemonList.graphql";
-import { InferArray } from "@/types";
+export type NonNullablePokemonListQuery = any;
 
-export type NonNullablePokemonListQuery = InferArray<
-  NonNullable<PokemonListQuery["pokemon_v2_pokemon"]>
->;
-
-export type PokemonSpeciesNodes = NonNullable<
-  NonNullablePokemonListQuery["pokemon_v2_pokemonspecy"]
->["pokemon_v2_pokemonspeciesnames_aggregate"]["nodes"];
-
+export type PokemonSpeciesNodes = any;
 export interface PokemonSpeciesStates {
   speciesList: PokemonSpeciesNodes;
 }
