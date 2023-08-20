@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "yarn codegen && next dev",
     "build": "next build",
-    "start": "yarn codegen && next build&& next start",
+    "start": "next start",
     "lint": "next lint",
     "test": "vitest",
     "test:ui": "vitest --ui",
@@ -16,7 +16,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "husky install",
-    "codegen": "DOTENV_CONFIG_PATH=.env graphql-codegen --require dotenv/config --config codegen.ts"
+    "codegen": "DOTENV_CONFIG_PATH=.env graphql-codegen -r dotenv/config"
   },
   "dependencies": {
     "@apollo/client": "^3.7.17",
