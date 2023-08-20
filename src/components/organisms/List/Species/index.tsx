@@ -19,13 +19,15 @@ import {
 const PokemonSpeciesCard = () => {
   const states = usePokemonSpeciesStates();
   const handlers = usePokemonSpeciesHandlers(states);
-  const { usePokemonListEffect } = usePokemonSpeciesEffects({
-    ...states,
-    ...handlers,
-  });
+  const { usePokemonListEffect, useInfiniteScrollEffect } =
+    usePokemonSpeciesEffects({
+      ...states,
+      ...handlers,
+    });
   const { speciesList } = states;
 
   usePokemonListEffect();
+  useInfiniteScrollEffect();
 
   return (
     <Wrapper>
