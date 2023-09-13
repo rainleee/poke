@@ -19,7 +19,7 @@
     "codegen": "DOTENV_CONFIG_PATH=.env graphql-codegen --require dotenv/config --config codegen.ts"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.17",
+    "@apollo/client": "^3.8.3",
     "@stitches/react": "^1.2.8",
     "@tanstack/react-query": "^4.29.25",
     "@types/react": "18.2.0",
